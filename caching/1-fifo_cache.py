@@ -9,20 +9,21 @@ class FIFOCache(BaseCaching):
 
     def __init__(self):
         super().__init__()
+        self.order = []
 
     def put(self, key, item):
         if key is None or item is None:
             return
 
+        if key not in self.cache_data:
+            self.order.append(key)
+
         self.cache_data[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-
-            first_key = next(iter(self.cache_data))
-
-            del self.cache_data[first_key]
-
-            print("DISCARD:", first_key)
+            discard_key = self.order.pop(0)
+            del self.cache_data[discard_key]
+            print("DISCARD: {}".format(discard_key))
 
     def get(self, key):
         if key is None:
