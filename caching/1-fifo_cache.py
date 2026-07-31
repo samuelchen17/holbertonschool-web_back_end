@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """FIFOCache module"""
 
-BaseCaching = __import__("base_caching").BaseCaching
+from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
     """FIFOCache inherits from BaseCaching"""
 
     def __init__(self):
+        """init FIFO cache and track insert order"""
         super().__init__()
         self.order = []
 
     def put(self, key, item):
+        """add item to cache using FIFO"""
         if key is None or item is None:
             return
 
@@ -26,6 +28,7 @@ class FIFOCache(BaseCaching):
             print("DISCARD: {}".format(discard_key))
 
     def get(self, key):
+        """given key return value from cache"""
         if key is None:
             return None
 
