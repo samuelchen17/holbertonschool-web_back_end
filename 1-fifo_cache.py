@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""BasicCache module"""
+"""FIFOCache module"""
 
 BaseCaching = __import__("base_caching").BaseCaching
 
 
-class BasicCache(BaseCaching):
-    """BasicCache inherits from BaseCaching"""
+class FIFOCache(BaseCaching):
+    """FIFOCache inherits from BaseCaching"""
 
     def __init__(self):
         super().__init__()
@@ -15,6 +15,14 @@ class BasicCache(BaseCaching):
             return
 
         self.cache_data[key] = item
+
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+
+            first_key = next(iter(self.cache_data))
+
+            del self.cache_data[first_key]
+
+            print("DISCARD:", first_key)
 
     def get(self, key):
         if key is None:
