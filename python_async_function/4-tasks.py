@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""This module defines a coroutine that concurrently runs multiple wait function"""
+"""This module concurrently runs multiple async tasks"""
 
 import asyncio
 from typing import List
@@ -8,7 +8,7 @@ task_wait_random = __import__("3-tasks").task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
-    """function will run wait_random n times and return a list of the delays"""
+    """function will run task_wait_random n times and return delays"""
     tasks = [task_wait_random(max_delay) for _ in range(n)]
 
     delays = []
