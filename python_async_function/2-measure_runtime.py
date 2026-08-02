@@ -10,11 +10,11 @@ wait_n = __import__("1-basic_async_syntax").wait_n
 def measure_time(n: int, max_delay: int) -> float:
     """return total average execution time"""
 
-    start = time.perf_counter()
+    start = time.time()
 
     asyncio.run(wait_n(n, max_delay))
 
-    end = time.perf_counter()
+    end = time.time()
 
     total_time = end - start
 
