@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Module contains helper function for pagination"""
 
 from typing import Tuple
