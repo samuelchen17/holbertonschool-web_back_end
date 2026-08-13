@@ -32,19 +32,15 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        pass
+        """return list of rows belonging to requested page"""
+        assert page > 0 and isinstance(page, int)
+        assert page_size > 0 and isinstance(page_size, int)
 
+        start, end = index_range(page, page_size)
 
-def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-    """return list of rows belonging to requested page"""
-    assert page > 0 and isinstance(page, int)
-    assert page_size > 0 and isinstance(page_size, int)
+        dataset = self.dataset()
 
-    start, end = index_range(page, page_size)
+        if start >= len(dataset):
+            return []
 
-    dataset = self.dataset()
-
-    if start >= len(dataset):
-        return []
-
-    return dataset[start:end]
+        return dataset[start:end]
