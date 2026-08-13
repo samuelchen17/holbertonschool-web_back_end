@@ -37,8 +37,12 @@ class Server:
 
 def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
     """return list of rows belonging to requested page"""
-    assert page > 0 and isinstance(page, int)
-    assert page_size > 0 and isinstance(page_size, int)
+    assert page > 0 and isinstance(
+        page, int
+    ), "Page must be int and greater than 0"
+    assert page_size > 0 and isinstance(
+        page_size, int
+    ), "Page size myst be in and greater than 0"
 
     start, end = index_range(page, page_size)
 
