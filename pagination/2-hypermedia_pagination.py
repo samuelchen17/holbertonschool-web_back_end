@@ -45,19 +45,14 @@ class Server:
 
         return dataset[start:end]
 
-    def get_hyper(
-        self, page: int = 1, page_size: int = 10
-    ) -> Dict[str, Union[int, List, None]]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """return a dictionary containing hypermedia pagination info"""
 
         data = self.get_page(page, page_size)
 
-        if self.dataset():
-            total_pages = math.ceil(len(self.dataset()) / page_size)
-        else:
-            total_pages = 0
+        total_pages = math.ceil(len(self.dataset()) / page_size)
         next_page = page + 1 if page < total_pages else None
-        prev_page = page - 1 if page > 1 else ModuleNotFoundError
+        prev_page = page - 1 if page > 1 else None
 
         return {
             "page_size": len(data),
