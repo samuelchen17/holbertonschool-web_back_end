@@ -4,4 +4,5 @@
 
 def list_all(mongo_collection):
     """list all docs in collection"""
-    return list(mongo_collection.find())
+
+    return mongo_collection.insert_one(kwargs).inserted_id
