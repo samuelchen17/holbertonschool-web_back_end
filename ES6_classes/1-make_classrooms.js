@@ -9,3 +9,5 @@ const initializeRooms = () => {
 
     return classRooms;
 }
+
+export default initializeRooms;
