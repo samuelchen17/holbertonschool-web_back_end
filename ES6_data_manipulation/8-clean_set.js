@@ -6,7 +6,7 @@ const cleanSet = (set, startString) => {
   }
 
   set.forEach((element) => {
-    if (element.startsWith(startString)) {
+    if (typeof element === 'string' && element.startsWith(startString)) {
       const value = element.slice(startString.length);
 
       if (string === '') {
