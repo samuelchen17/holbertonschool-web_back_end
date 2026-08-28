@@ -1,4 +1,4 @@
-const hasValuesFromArray = (arr, set) => {
+const hasValuesFromArray = (set, arr) => {
   if (!Array.isArray(arr)) {
     return false;
   }
