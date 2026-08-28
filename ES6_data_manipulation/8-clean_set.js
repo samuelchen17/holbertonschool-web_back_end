@@ -1,6 +1,10 @@
 const cleanSet = (set, startString) => {
   let string = '';
 
+  if (!startString) {
+    return '';
+  }
+
   set.forEach((element) => {
     if (element.startsWith(startString)) {
       const value = element.slice(startString.length);
