@@ -11,7 +11,7 @@ const updateStudentGradeByCity = (students, city, newGrades) => {
         (grade) => grade.studentId === student.id,
       );
 
-      const updatedGrade = studentGrade ? studentGrade.grade : ' N/A';
+      const updatedGrade = studentGrade ? studentGrade.grade : 'N/A';
 
       return { ...student, grade: updatedGrade };
     });
