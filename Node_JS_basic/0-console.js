@@ -1,7 +1,5 @@
 // 0-console.js
 
-const displayMessage = (message) => {
+export default function displayMessage(message) {
   console.log(message);
-};
-
-export default displayMessage;
+}
