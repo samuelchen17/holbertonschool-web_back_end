@@ -4,7 +4,7 @@ function countStudents(path) {
   try {
     const fileContent = fs.readFileSync(path, 'utf-8');
 
-    lines = fileContent.split('\n').filter((line) => line.trim() !== '');
+    const lines = fileContent.split('\n').filter((line) => line.trim() !== '');
 
     const students = lines.slice(1);
     const total = students.length;
