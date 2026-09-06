@@ -8,7 +8,7 @@ class StudentsController {
       const db = await readDatabase(DB_FILE);
 
       const fields = Object.keys(db).sort((a, b) =>
-        a.toLowerCase().localeCompare(b.toLowerCase()),
+        a.localeCompare(b, undefined, { sensitivity: 'base' }),
       );
 
       const body = ['This is the list of our students'];
