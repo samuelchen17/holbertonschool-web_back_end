@@ -1,8 +1,9 @@
 const express = require('express');
 
 const app = express();
-const PORT = 1245;
+const PORT = 8080;
 const DB_FILE = process.argv[2];
+const fs = require('fs');
 
 function countStudents(path) {
   return new Promise((resolve, reject) => {
