@@ -13,28 +13,26 @@ const readDatabase = (filePath) =>
         return;
       }
 
-      const lines = data.split('\n').filter((line) => line.trim().length > 0);
+      const lines = data.split('\n').filter((line) => line.trim() !== '');
+
+      const fields = {};
 
       if (lines.length <= 1) {
-        resolve({});
+        resolve(fields);
         return;
       }
 
-      const studentLines = lines.slice(1);
-      const fields = {};
+      const students = lines.slice(1);
 
-      for (const line of studentLines) {
-        const studentData = line.split(',');
+      for (const student of students) {
+        const studentData = student.split(',');
+        const firstName = studentData[0];
+        const field = studentData[3];
 
-        if (studentData.length >= 4) {
-          const firstName = studentData[0].trim();
-          const field = studentData[3].trim();
-
-          if (!fields[field]) {
-            fields[field] = [];
-          }
-          fields[field].push(firstName);
+        if (!fields[field]) {
+          fields[field] = [];
         }
+        fields[field].push(firstName);
       }
 
       resolve(fields);
