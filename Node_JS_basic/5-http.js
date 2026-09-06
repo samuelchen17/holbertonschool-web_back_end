@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 
-const PORT = 1245;
+const PORT = 8080;
 const DB_FILE = process.argv[2];
 
 function countStudents(path) {
@@ -33,15 +33,14 @@ function countStudents(path) {
         fields[field].push(firstName);
       }
 
-      const body = ['This is the list of our students'];
-
-      body.push(`Number of students: ${total}`);
+      const studentData = [];
+      studentData.push(`Number of students: ${total}`);
       Object.keys(fields).forEach((field) => {
-        body.push(
+        studentData.push(
           `Number of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`,
         );
       });
-      resolve(body.join('\n'));
+      resolve(studentData.join('\n'));
     });
   });
 }
@@ -55,11 +54,14 @@ const app = http.createServer(async (req, res) => {
   } else if (req.url === '/students') {
     res.statusCode = 200;
 
+    const body = ['This is the list of our students'];
+
     try {
       const data = await countStudents(DB_FILE);
-      res.end(data);
+      body.push(data);
+      res.end(body.join('\n'));
     } catch (err) {
-      res.end(err.message);
+      res.end(`${body.join('\n')}\n${err.message}`);
     }
   } else {
     res.statusCode = 404;
