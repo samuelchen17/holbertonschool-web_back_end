@@ -15,7 +15,7 @@ class StudentsController {
 
       fields.forEach((field) => {
         body.push(
-          `Number of students in ${field}: ${database[field].length}. List: ${database[field].join(', ')}`,
+          `Number of students in ${field}: ${db[field].length}. List: ${db[field].join(', ')}`,
         );
       });
 
@@ -29,14 +29,13 @@ class StudentsController {
     const { major } = req.params;
 
     if (major !== 'CS' && major !== 'SWE') {
-      res.status(500).send('Major parameter must be CS or SWE');
-      return;
+      return res.status(500).send('Major parameter must be CS or SWE');
     }
 
     try {
-      const database = await readDatabase(process.argv[2]);
+      const db = await readDatabase(DB_FILE);
 
-      res.status(200).send(`List: ${database[major].join(', ')}`);
+      res.status(200).send(`List: ${db[major].join(', ')}`);
     } catch (err) {
       res.status(500).send('Cannot load the database');
     }
@@ -44,4 +43,3 @@ class StudentsController {
 }
 
 export default StudentsController;
-ß;
