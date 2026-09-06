@@ -1,27 +1,23 @@
 import readDatabase from '../utils';
 
-const DB_FILE = process.argv[2];
+const filePath = process.argv[2];
 
-class StudentsController {
+export default class StudentsController {
   static async getAllStudents(req, res) {
     try {
-      const db = await readDatabase(DB_FILE);
-
-      const fields = Object.keys(db).sort((a, b) =>
+      const students = await readDatabase(filePath);
+      const fields = Object.keys(students).sort((a, b) =>
         a.localeCompare(b, undefined, { sensitivity: 'base' }),
       );
 
-      const body = ['This is the list of our students'];
-
+      let result = 'This is the list of our students\n';
       fields.forEach((field) => {
-        body.push(
-          `Number of students in ${field}: ${db[field].length}. List: ${db[field].join(', ')}`,
-        );
+        result += `Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}\n`;
       });
 
-      res.status(200).send(body.join('\n'));
-    } catch (err) {
-      res.status(500).send('Cannot load the database');
+      res.status(200).send(result);
+    } catch (error) {
+      res.status(500).send(error.message);
     }
   }
 
@@ -33,13 +29,12 @@ class StudentsController {
     }
 
     try {
-      const db = await readDatabase(DB_FILE);
+      const students = await readDatabase(filePath);
+      const studentList = students[major];
 
-      res.status(200).send(`List: ${db[major].join(', ')}`);
-    } catch (err) {
-      res.status(500).send('Cannot load the database');
+      res.status(200).send(`List: ${studentList.join(', ')}`);
+    } catch (error) {
+      res.status(500).send(error.message);
     }
   }
 }
-
-export default StudentsController;
